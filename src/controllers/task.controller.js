@@ -222,6 +222,6 @@ const getTaskState=asyncHandler(async(req,res)=>{
             )
       
         })
-        
+
 
 export {createTask,getMyTasks,updateTask,deleteTask,getTaskState,getSingleTask}

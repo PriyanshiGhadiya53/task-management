@@ -95,7 +95,8 @@ const login=asyncHandler(async(req,res)=>{
     const {accessToken,refreshToken}=await generateToken(user._id||user.id)
     const options={
         httpOnly:true,
-        secure:true
+        secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     }
 
     const logginuser=await User.findById(user._id).select("-password -refreshToken")
@@ -125,7 +126,8 @@ const logout=asyncHandler(async(req,res)=>{
 )
 const options={
     httpOnly:true,
-    secure:true
+    secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
 }
 return res.status(200)
 .clearCookie("accessToken",options)
@@ -166,7 +168,8 @@ const refreshAcecsessToken =asyncHandler(async (req,res)=>{
      
           const options ={
            httpOnly:true,
-           secure:true
+          secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
           }
           const { accessToken, refreshToken: newrefreshToken } = await generateToken(user._id);
 
