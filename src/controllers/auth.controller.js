@@ -114,28 +114,27 @@ const login=asyncHandler(async(req,res)=>{
 })
 
 //logout
-const logout=asyncHandler(async(req,res)=>{
-    await User.findByIdAndUpdate(req.user._id,{
-        $set:{
-            refreshToken:undefined
-        }
-    },
-    {
-        new:true,
-    }
-)
-const options={
-    httpOnly:true,
-    secure: process.env.NODE_ENV === "production",
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-}
-return res.status(200)
-.clearCookie("accessToken",options)
-.clearCookie("refreshToken",options)
-.json(new Apiresponse(200,{},"user logged out successfully"))
+const logout = asyncHandler(async (req, res) => {
 
-})
+  const options = {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+  };
+  console.log("Status:", 200);
 
+  return res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(
+      new Apiresponse(
+        200,
+        "Logout successful",
+         {},
+      )
+    );
+});
 //refreshaccess token
 const refreshAcecsessToken =asyncHandler(async (req,res)=>{
      try {
