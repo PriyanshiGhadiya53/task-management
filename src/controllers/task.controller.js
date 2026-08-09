@@ -1,6 +1,6 @@
 import { asyncHandler } from "../utils/asynchandler.js";
 import {ApiError} from "../utils/Apierror.js";
-import {Apiresponse} from "../utils/apiresponse.js";
+import {Apiresponse} from "../utils/Apiresponse.js";
 import {Task} from "../models/task.model.js";
 import mongoose from "mongoose";
 
