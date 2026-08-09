@@ -7,9 +7,14 @@ import taskRouter from "./routes/task.router.js";
 
 const app=express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://task-management-rho-three-42.vercel.app"
+];
+
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN , // Fallback frontend URL
+    origin: allowedOrigins,
     credentials: true,
   })
 );//middleware ya config setting karani hai tab app.use karate hai 
