@@ -9,7 +9,7 @@ const app=express();
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:5173", // Fallback frontend URL
+    origin: process.env.CORS_ORIGIN , // Fallback frontend URL
     credentials: true,
   })
 );//middleware ya config setting karani hai tab app.use karate hai 
