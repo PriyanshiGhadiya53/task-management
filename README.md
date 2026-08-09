@@ -9,7 +9,6 @@ A full-stack task management application built with React, Node.js, Express, and
 * Protected Routes
 * Create, Update & Delete Tasks
 * Task Status Management
-* Change Password
 * Responsive UI
 
 ## 🛠️ Tech Stack
