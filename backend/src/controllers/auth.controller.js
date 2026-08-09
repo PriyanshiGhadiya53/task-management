@@ -93,10 +93,10 @@ const login=asyncHandler(async(req,res)=>{
     console.log("Password Match:", ispasswordcorrect);
 
     const {accessToken,refreshToken}=await generateToken(user._id||user.id)
-    const options={
-        httpOnly:true,
-        secure: process.env.NODE_ENV === "production",
-  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    const options={httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/",
     }
 
     const logginuser=await User.findById(user._id).select("-password -refreshToken")
@@ -113,15 +113,25 @@ const login=asyncHandler(async(req,res)=>{
 
 })
 
-//logout
+//logou
 const logout = asyncHandler(async (req, res) => {
-
   const options = {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: true,
+    sameSite: "none",
+    path: "/",
   };
-  console.log("Status:", 200);
+
+  if (req.user?._id) {
+    await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        $unset: {
+          refreshToken: 1,
+        },
+      }
+    );
+  }
 
   return res
     .status(200)
@@ -130,8 +140,8 @@ const logout = asyncHandler(async (req, res) => {
     .json(
       new Apiresponse(
         200,
-        "Logout successful",
-         {},
+        {},
+        "User logged out successfully"
       )
     );
 });

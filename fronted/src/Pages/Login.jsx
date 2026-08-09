@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL;
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -45,8 +46,7 @@ function Login() {
       toast.success("Login Successful");
 
 
-setEmail("");
-setPassword("");
+
 
 
 

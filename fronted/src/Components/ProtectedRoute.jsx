@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function ProtectedRoute({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -9,12 +11,14 @@ function ProtectedRoute({ children }) {
     const checkUser = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/v1/user/me`,
+          `${API_URL}/api/v1/user/me`,
           {
             method: "GET",
             credentials: "include",
           }
         );
+
+        console.log("ME STATUS:", response.status);
 
         if (response.ok) {
           setIsAuthenticated(true);
@@ -22,7 +26,7 @@ function ProtectedRoute({ children }) {
           setIsAuthenticated(false);
         }
       } catch (error) {
-        console.log(error);
+        console.log("ME ERROR:", error);
         setIsAuthenticated(false);
       } finally {
         setLoading(false);
@@ -33,11 +37,7 @@ function ProtectedRoute({ children }) {
   }, []);
 
   if (loading) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <div>Loading...</div>;
   }
 
   if (!isAuthenticated) {

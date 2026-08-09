@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL;
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -32,8 +33,7 @@ function Register() {
       const generatedUsername = name.trim().toLowerCase().replace(/\s+/g, "");
 
       const response = await fetch(
-       `${import.meta.env.VITE_API_URL}/api/v1/user/register`,
-        {
+       `${import.meta.env.VITE_API_URL}/api/v1/user/register`,{
           method: "POST",
           headers: {
             "Content-Type": "application/json",

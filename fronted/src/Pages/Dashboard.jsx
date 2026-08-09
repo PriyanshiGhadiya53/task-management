@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+const API_URL = import.meta.env.VITE_API_URL;
 import Navbar from "../Components/Navbar";
 import TaskForm from "../Components/TaskForm";
 import TaskList from "../Components/TaskList";
@@ -38,7 +39,7 @@ function Dashboard() {
   const [deleteTaskId, setDeleteTaskId] = useState(null);
 
   // ================= FETCH TASKS =================
-  const fetchTasks = async () => {
+  const fetchTask = async () => {
   try {
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/v1/task/mytasks`,
@@ -48,12 +49,17 @@ function Dashboard() {
       }
     );
 
+    console.log("TASK STATUS:", response.status);
+
+    const data = await response.json();
+
+    console.log("TASK DATA:", data);
+
     if (response.status === 401) {
+      console.log("TASK AUTH FAILED");
       navigate("/login", { replace: true });
       return;
     }
-
-    const data = await response.json();
 
     if (!response.ok) {
       toast.error(data.message);
@@ -62,17 +68,16 @@ function Dashboard() {
 
     setTasks(data.data);
   } catch (error) {
-    console.log(error);
+    console.log("TASK ERROR:", error);
     toast.error("Unable to fetch tasks");
   } finally {
     setLoading(false);
   }
 };
-
   const fetchCurrentUser = async () => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}api/v1/user/me`,
+      `${import.meta.env.VITE_API_URL}/api/v1/user/me`,
       {
         method: "GET",
         credentials: "include",

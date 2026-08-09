@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+const API_URL = import.meta.env.VITE_API_URL;
 function Home() {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
