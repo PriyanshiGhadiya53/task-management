@@ -22,7 +22,7 @@ A full-stack task management application built with React, Node.js, Express, and
 
 ## 🔗 Live Demo
 
-Frontend: `YOUR_FRONTEND_URL`
+Frontend: `task-management-rho-three-42.vercel.app`
 
 Backend: `https://task-management-backend-sw4l.onrender.com`
 
