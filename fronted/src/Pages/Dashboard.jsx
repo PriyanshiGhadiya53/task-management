@@ -39,7 +39,7 @@ function Dashboard() {
   const [deleteTaskId, setDeleteTaskId] = useState(null);
 
   // ================= FETCH TASKS =================
-  const fetchTask = async () => {
+  const fetchTasks= async () => {
   try {
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/v1/task/mytasks`,
@@ -49,11 +49,11 @@ function Dashboard() {
       }
     );
 
-    console.log("TASK STATUS:", response.status);
+  
 
     const data = await response.json();
 
-    console.log("TASK DATA:", data);
+   
 
     if (response.status === 401) {
       console.log("TASK AUTH FAILED");
